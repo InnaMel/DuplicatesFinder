@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DuplicatesFinder.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace DuplicatesFinder
         public MainWindow()
         {
             InitializeComponent();
+
+            MainWindowViewModel MainWindowVM = new MainWindowViewModel();
+            this.DataContext = MainWindowVM;
+            if (MainWindowVM.CloseMainWindow == null)
+                MainWindowVM.CloseMainWindow = new Action(this.Close);
         }
     }
 }

@@ -1,9 +1,125 @@
-﻿<Application x:Class="DuplicatesFinder.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DuplicatesFinder"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="DuplicatesFinder.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DuplicatesFinder"
+    StartupUri="MainWindow.xaml">
+
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DuplicatesFinder;component/Resources/CloseButtonStyle.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="CustomStyleWindow" TargetType="{x:Type Window}">
+                        <Setter Property="SnapsToDevicePixels" Value="True" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Title" Value="My custom window" />
+                        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+                        <Setter Property="WindowState" Value="{Binding CurrentWindowState}" />
+                        <Setter Property="WindowChrome.WindowChrome">
+                            <Setter.Value>
+                                <WindowChrome
+                                    CaptionHeight="30"
+                                    CornerRadius="0"
+                                    GlassFrameThickness="-1"
+                                    ResizeBorderThickness="5" />
+                            </Setter.Value>
+                        </Setter>
+
+                        <Setter x:Name="myMainTemplate" Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Window">
+                                    <Border Background="#fbf8ec">
+
+                                        <!--  Main grid  -->
+                                        <Grid Background="Transparent">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="60" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <!--  TOP border - Non client area  -->
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="90" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock
+                                                    Margin="10,0,0,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontFamily="Didact Gothic"
+                                                    FontSize="14"
+                                                    FontStyle="Normal"
+                                                    FontWeight="ExtraLight"
+                                                    Foreground="#8d8d8d"
+                                                    Text="{TemplateBinding Title}" />
+
+                                                <!--  All state buttons  -->
+                                                <StackPanel
+                                                    Grid.Column="1"
+                                                    HorizontalAlignment="Right"
+                                                    Orientation="Horizontal">
+                                                    <Button
+                                                        Width="30"
+                                                        Height="30"
+                                                        Background="Transparent"
+                                                        BorderBrush="Transparent"
+                                                        BorderThickness="0"
+                                                        Command="{Binding ButtonMinimazing}"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                                        <Line
+                                                            SnapsToDevicePixels="True"
+                                                            Stroke="Black"
+                                                            StrokeThickness="1"
+                                                            X1="0"
+                                                            X2="10"
+                                                            Y1="10"
+                                                            Y2="10" />
+                                                    </Button>
+                                                    <Button
+                                                        Width="30"
+                                                        Height="30"
+                                                        Background="Transparent"
+                                                        BorderBrush="Transparent"
+                                                        BorderThickness="0"
+                                                        Command="{Binding ButtonMaximazing}"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                                        <Grid>
+                                                            <Line
+                                                                Panel.ZIndex="1"
+                                                                SnapsToDevicePixels="True"
+                                                                Stroke="Black"
+                                                                StrokeThickness="1"
+                                                                X1="0"
+                                                                X2="12"
+                                                                Y1="0"
+                                                                Y2="0" />
+                                                            <Rectangle
+                                                                Width="12"
+                                                                Height="10"
+                                                                Stroke="Black"
+                                                                StrokeThickness="1" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <Button
+                                                        Width="30"
+                                                        Height="30"
+                                                        Command="{Binding ButtonClosing}"
+                                                        Style="{StaticResource setRedBGCloseButtonWhenMouseOver}"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <ContentPresenter Grid.Row="1" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary Source="/DuplicatesFinder;component/Resources/ResizeGripStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
