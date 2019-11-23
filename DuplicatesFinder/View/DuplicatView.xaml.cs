@@ -49,7 +49,7 @@ namespace DuplicatesFinder.View
             DuplicatesViewModelObject.EnteredPathFromUser = forEnterPath.Text;
 
             this.DataContext = DuplicatesViewModelObject;
-           
+            DuplicatesViewModelObject.GetAnimation += StartUKHeightAnimation;
         }
 
 
@@ -68,7 +68,7 @@ namespace DuplicatesFinder.View
         public void StartUKHeightAnimation()
         {
             UKHeightAnimation.From = DuplicatViewControl.ActualHeight;
-            UKHeightAnimation.To = 720;
+            UKHeightAnimation.To = 220;
             UKHeightAnimation.Duration = TimeSpan.FromSeconds(3);
             DuplicatViewControl.BeginAnimation(UserControl.HeightProperty, UKHeightAnimation);
         }

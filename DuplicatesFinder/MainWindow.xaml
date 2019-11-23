@@ -8,7 +8,7 @@
     xmlns:views="clr-namespace:DuplicatesFinder.View"
     Title="--- Duplicates Finder ---"
     Width="600"
-    Height="{Binding MainHeight, Mode=TwoWay}"
+    Height="800"
     Style="{StaticResource CustomStyleWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

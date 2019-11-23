@@ -36,7 +36,7 @@
         <!--  Triggers for mouseOver for close button  -->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#ba0000" />
+                <Setter Property="Background" Value="#f03a02" />
                 <Setter Property="Foreground" Value="White" />
             </Trigger>
         </Style.Triggers>

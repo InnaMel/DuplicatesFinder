@@ -52,7 +52,7 @@
                                                     FontSize="14"
                                                     FontStyle="Normal"
                                                     FontWeight="ExtraLight"
-                                                    Foreground="#8d8d8d"
+                                                    Foreground="#c3c1b7"
                                                     Text="{TemplateBinding Title}" />
 
                                                 <!--  All state buttons  -->

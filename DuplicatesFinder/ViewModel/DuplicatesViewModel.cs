@@ -137,6 +137,8 @@ namespace DuplicatesFinder.ViewModel
             DuplicatesList = AllObservsDuplicatesForForm;
         }
 
+        public event Action GetAnimation;
+
         /// <summary>
         /// Employing class "RelayCommand" for using Command for the button (at searching duplicates)
         /// </summary>
@@ -151,7 +153,7 @@ namespace DuplicatesFinder.ViewModel
                     GetChecked();
                     if (CheckedUI.Data != null)
                         EnteredPathFromUser = CheckedUI.Data;
-                    //StartUKHeightAnimation();
+                    //GetAnimation();
                     GetAllListsDuplicatesForForm(EnteredPathFromUser);
                 }
                 ));
