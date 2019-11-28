@@ -134,6 +134,7 @@
                 VerticalAlignment="Center"
                 Text="&gt;&gt; "
                 TextAlignment="Right" />
+
             <TextBox
                 x:Name="forEnterPath"
                 Grid.Row="2"
@@ -141,9 +142,11 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
-                BorderThickness="0"
+                BorderBrush="Black"
+                BorderThickness="0,0,0,1"
                 Foreground="#7a7a7a"
                 KeyDown="Clear_Text"
+                Opacity="0.4"
                 Text="{Binding Path=EnteredPathFromUser, Mode=TwoWay}"
                 TextElement.FontSize="14"
                 TextElement.FontStretch="Medium" />
@@ -243,8 +246,14 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="#c3c1b7" />
-
-        <ScrollViewer CanContentScroll="True">
+        <ScrollViewer
+            Grid.Row="6"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch"
+            CanContentScroll="True"
+            VerticalScrollBarVisibility="Visible">
             <StackPanel
                 Grid.Row="6"
                 Grid.Column="0"
@@ -255,10 +264,12 @@
                 <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesList}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="***" />
-                                <CheckBox Content="{Binding NameOfList}" />
-                                <ScrollViewer CanContentScroll="True">
+                            <ScrollViewer
+                                CanContentScroll="True"
+                                VerticalScrollBarVisibility="Visible">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="***" />
+                                    <CheckBox Content="{Binding NameOfList}" />
                                     <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesOfList}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
@@ -266,8 +277,8 @@
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
-                                </ScrollViewer>
-                            </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
