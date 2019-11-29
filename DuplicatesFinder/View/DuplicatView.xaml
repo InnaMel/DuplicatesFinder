@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:DuplicatesFinder.ViewModel"
     x:Name="DuplicatViewControl"
-    d:DesignHeight="200"
+    d:DesignHeight="600"
     d:DesignWidth="600"
     Loaded="WindowHasLoaded"
     mc:Ignorable="d">
@@ -250,26 +250,21 @@
             Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            HorizontalAlignment="Right"
             VerticalAlignment="Stretch"
             CanContentScroll="True"
             VerticalScrollBarVisibility="Visible">
-            <StackPanel
+            <ItemsControl
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="10,20,10,0"
-                Panel.ZIndex="100"
-                Orientation="Vertical">
+                Panel.ZIndex="100">
                 <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesList}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <ScrollViewer
-                                CanContentScroll="True"
-                                VerticalScrollBarVisibility="Visible">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="***" />
-                                    <CheckBox Content="{Binding NameOfList}" />
+                            <Border Width="{Binding ElementName=DuplicatViewControl, Path=DesignWidth}" BorderBrush="#f03a02" BorderThickness="0 0 0 1" Margin="0 2 0 20">
+                                <StackPanel>
+                                    <CheckBox Content="{Binding NameOfList}" FontWeight="Bold" FontSize="12"/>
                                     <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesOfList}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
@@ -278,11 +273,11 @@
                                         </ListBox.ItemTemplate>
                                     </ListBox>
                                 </StackPanel>
-                            </ScrollViewer>
+                            </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </StackPanel>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>

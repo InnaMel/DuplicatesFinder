@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:DuplicatesFinder.View"
     Title="--- Duplicates Finder ---"
-    Width="600"
-    Height="800"
+    Width="620"
+    Height="620"
     Style="{StaticResource CustomStyleWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
