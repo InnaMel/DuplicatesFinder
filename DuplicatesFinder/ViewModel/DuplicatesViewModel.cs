@@ -9,6 +9,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.IO;
+using System.Windows.Media;
 
 namespace DuplicatesFinder.ViewModel
 {
@@ -66,6 +67,33 @@ namespace DuplicatesFinder.ViewModel
             }
         }
 
+        private double opacityEnteredText = 0.4;
+        public double OpacityEnteredText
+        {
+            get { return opacityEnteredText; }
+            set
+            {
+                if (opacityEnteredText != value)
+                {
+                    opacityEnteredText = value;
+                    RaisePropertyChanged("OpacityEnteredText");
+                }
+            }
+        }
+
+        private System.Windows.Media.SolidColorBrush colorEnteredText = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString("#7a7a7a"));
+        public System.Windows.Media.SolidColorBrush ColorEnteredText
+        {
+            get { return colorEnteredText; }
+            set
+            {
+                if (colorEnteredText != value)
+                {
+                    colorEnteredText = value;
+                    RaisePropertyChanged("ColorEnteredText");
+                }
+            }
+        }
 
         private string enteredPathFromUser;
         /// <summary>
@@ -73,12 +101,20 @@ namespace DuplicatesFinder.ViewModel
         /// </summary>
         public string EnteredPathFromUser
         {
-            get { return enteredPathFromUser; }
+            get
+            {
+                return enteredPathFromUser;
+            }
             set
             {
                 if (enteredPathFromUser != value)
                 {
                     enteredPathFromUser = value;
+                    if (enteredPathFromUser != "Enter the path for searching for duplicates")
+                    {
+                        OpacityEnteredText = 1;
+                        ColorEnteredText = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString("#f03a02"));
+                    }
                     RaisePropertyChanged("EnteredPathFromUser");
                 }
             }
@@ -113,28 +149,31 @@ namespace DuplicatesFinder.ViewModel
         /// <summary>
         /// Looking up the all duplicates and assign them to "ObservableCollection"
         /// </summary>
-        public void GetAllListsDuplicatesForForm(string userPath)
+        public async void GetAllListsDuplicatesForForm(string userPath)
         {
-            List<List<DuplicatesModel>> AllListsDuplicates = new List<List<DuplicatesModel>>();
-            ObservableCollection<ObservListWithNameForTemplate> AllObservsDuplicatesForForm = new ObservableCollection<ObservListWithNameForTemplate>();
-
-            if (HelperMetods.CheckDirectoryExists(userPath))
+            await Task.Run(() =>
             {
-                AllListsDuplicates = HelperMetods.GetDublicate(HelperMetods.GetAllFiles(userPath));
+                List<List<DuplicatesModel>> AllListsDuplicates = new List<List<DuplicatesModel>>();
+                ObservableCollection<ObservListWithNameForTemplate> AllObservsDuplicatesForForm = new ObservableCollection<ObservListWithNameForTemplate>();
 
-                foreach (List<DuplicatesModel> item in AllListsDuplicates)
+                if (HelperMetods.CheckDirectoryExists(userPath))
                 {
-                    AllObservsDuplicatesForForm.Add(HelperMetods.ConvertToCosilyDisplay(item));
-                }
-            }
-            else
-                MessageBox.Show("Can't find such path", "ERROR PATH", MessageBoxButton.OK, MessageBoxImage.Error);
+                    AllListsDuplicates = HelperMetods.GetDublicate(HelperMetods.GetAllFiles(userPath));
 
-            //foreach (var item in AllObservsDuplicatesForForm)
-            //{
-            //    DuplicatesList.Add(item);
-            //}
-            DuplicatesList = AllObservsDuplicatesForForm;
+                    foreach (List<DuplicatesModel> item in AllListsDuplicates)
+                    {
+                        AllObservsDuplicatesForForm.Add(HelperMetods.ConvertToCosilyDisplay(item));
+                    }
+                }
+                else
+                    MessageBox.Show("Can't find such path", "ERROR PATH", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                //foreach (var item in AllObservsDuplicatesForForm)
+                //{
+                //    DuplicatesList.Add(item);
+                //}
+                DuplicatesList = AllObservsDuplicatesForForm;
+            });
         }
 
         public event Action GetAnimation;

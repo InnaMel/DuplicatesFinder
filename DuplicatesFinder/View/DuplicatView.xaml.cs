@@ -45,8 +45,10 @@ namespace DuplicatesFinder.View
         {
             forEnterPath.Focus();
             forEnterPath.Text = "Enter the path for searching for duplicates";
+            //forEnterPath.Opacity = 0.4;
             DuplicatesViewModelObject = new ViewModel.DuplicatesViewModel();
             DuplicatesViewModelObject.EnteredPathFromUser = forEnterPath.Text;
+            forEnterPath.Opacity = DuplicatesViewModelObject.OpacityEnteredText;
 
             this.DataContext = DuplicatesViewModelObject;
             DuplicatesViewModelObject.GetAnimation += StartUKHeightAnimation;

@@ -29,7 +29,7 @@
                         <Setter x:Name="myMainTemplate" Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Window">
-                                    <Border Background="#fbf8ec">
+                                    <Border Background="#006d95">
 
                                         <!--  Main grid  -->
                                         <Grid Background="Transparent">
@@ -41,23 +41,24 @@
                                             <!--  TOP border - Non client area  -->
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="90" />
                                                     <ColumnDefinition />
                                                     <ColumnDefinition Width="90" />
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock
-                                                    Margin="10,0,0,0"
+                                                    Grid.Column="1"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontFamily="Didact Gothic"
                                                     FontSize="14"
                                                     FontStyle="Normal"
                                                     FontWeight="ExtraLight"
-                                                    Foreground="#c3c1b7"
+                                                    Foreground="#122e54"
                                                     Text="{TemplateBinding Title}" />
 
                                                 <!--  All state buttons  -->
                                                 <StackPanel
-                                                    Grid.Column="1"
+                                                    Grid.Column="2"
                                                     HorizontalAlignment="Right"
                                                     Orientation="Horizontal">
                                                     <Button
@@ -119,6 +120,7 @@
                     </Style>
                 </ResourceDictionary>
                 <ResourceDictionary Source="/DuplicatesFinder;component/Resources/ResizeGripStyle.xaml" />
+                <ResourceDictionary Source="/DuplicatesFinder;component/Resources/FooterTextStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

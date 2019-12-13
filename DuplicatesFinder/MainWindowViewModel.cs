@@ -30,6 +30,5 @@ namespace DuplicatesFinder
             ButtonMaximazing = new RelayCommand(() => CurrentWindowState = WindowState.Maximized);
             ButtonClosing = new RelayCommand(() => CloseMainWindow());
         }
-
     }
 }

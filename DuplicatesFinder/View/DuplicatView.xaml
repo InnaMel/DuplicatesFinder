@@ -15,23 +15,19 @@
     <UserControl.Resources>
         <Style x:Key="styleForDirectory" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Background" Value="#fbf8ec" />
-            <Setter Property="Foreground" Value="#8d8d8d" />
-            <Setter Property="BorderBrush" Value="#7a7a7a" />
-            <Setter Property="BorderThickness" Value="3,3,3,3" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
+                        <Border BorderBrush="Black" BorderThickness="1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#f03a02" />
                     <Setter Property="Cursor" Value="Hand" />
                 </Trigger>
             </Style.Triggers>
@@ -40,7 +36,7 @@
 
         <Style x:Key="styleForSearch" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Background" Value="#8d8d8d" />
+            <Setter Property="Background" Value="#122e54" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -53,7 +49,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#7a7a7a" />
+                    <!--<Setter Property="Background" Value="#183f73" />-->
                     <Setter Property="Cursor" Value="Hand" />
                 </Trigger>
             </Style.Triggers>
@@ -69,6 +65,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="6" />
             <RowDefinition />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -132,6 +129,7 @@
                 Grid.Row="2"
                 Margin="15,0,0,0"
                 VerticalAlignment="Center"
+                Foreground="#122e54"
                 Text="&gt;&gt; "
                 TextAlignment="Right" />
 
@@ -142,11 +140,11 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
-                BorderBrush="Black"
+                BorderBrush="#122e54"
                 BorderThickness="0,0,0,1"
-                Foreground="#7a7a7a"
+                Foreground="{Binding ColorEnteredText, Mode=TwoWay}"
                 KeyDown="Clear_Text"
-                Opacity="0.4"
+                Opacity="{Binding OpacityEnteredText, Mode=TwoWay}"
                 Text="{Binding Path=EnteredPathFromUser, Mode=TwoWay}"
                 TextElement.FontSize="14"
                 TextElement.FontStretch="Medium" />
@@ -262,16 +260,27 @@
                 <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesList}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Width="{Binding ElementName=DuplicatViewControl, Path=DesignWidth}" BorderBrush="#f03a02" BorderThickness="0 0 0 1" Margin="0 2 0 20">
+                            <Border
+                                Width="{Binding ElementName=DuplicatViewControl, Path=DesignWidth}"
+                                Margin="0,2,0,20"
+                                BorderBrush="#f03a02"
+                                BorderThickness="0,0,0,1">
                                 <StackPanel>
-                                    <CheckBox Content="{Binding NameOfList}" FontWeight="Bold" FontSize="12"/>
-                                    <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesOfList}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <CheckBox Content="{Binding FilePath}" />
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
+                                    <Expander Header="{Binding NameOfList}" IsExpanded="True">
+                                        <StackPanel>
+                                            <CheckBox
+                                                Content="Select all group"
+                                                FontSize="12"
+                                                FontWeight="Bold" />
+                                            <ListBox BorderThickness="0" ItemsSource="{Binding DuplicatesOfList}">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Content="{Binding FilePath}" />
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </StackPanel>
+                                    </Expander>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -279,5 +288,16 @@
                 </ListBox>
             </ItemsControl>
         </ScrollViewer>
+        <!--  Content="{Binding NameOfList}"  -->
+
+        <StackPanel
+            Grid.Row="7"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Background="#122e54">
+            <Separator Background="#8d8d8d" />
+            <TextBlock Style="{StaticResource FooterTextStyle}" Text="version 3.0  |  Nov 2019" />
+            <TextBlock Style="{StaticResource FooterTextStyle}" Text="for questions and suggestions, pls, write me: innamelnikovaukr@gmail.com" />
+        </StackPanel>
     </Grid>
 </UserControl>
